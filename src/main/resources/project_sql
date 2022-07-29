@@ -1,0 +1,21 @@
+alter table book drop foreign key FKklnrv3weler2ftkweewlky958
+alter table library_books drop foreign key FKgbinqadvq3sbbup6b1twjchnj
+alter table library_books drop foreign key FKcwjjd1vlba8vwjrjkvyaaomqw
+drop table if exists author
+drop table if exists book
+drop table if exists hibernate_sequence
+drop table if exists library
+drop table if exists library_books
+drop table if exists post
+drop table if exists tag
+create table author (id integer not null, name varchar(255), surname varchar(255), primary key (id)) engine=InnoDB
+create table book (id integer not null, name varchar(255), author_id integer, primary key (id)) engine=InnoDB
+create table hibernate_sequence (next_val bigint) engine=InnoDB
+ insert into hibernate_sequence values ( 1 )
+create table library (id integer not null auto_increment, name varchar(255), primary key (id)) engine=InnoDB
+create table library_books (library_id integer not null, book_id integer not null) engine=InnoDB
+create table post (id integer not null, content varchar(255), title varchar(255), primary key (id)) engine=InnoDB
+create table tag (id integer not null, name varchar(255), primary key (id)) engine=InnoDB
+alter table book add constraint FKklnrv3weler2ftkweewlky958 foreign key (author_id) references author (id)
+alter table library_books add constraint FKgbinqadvq3sbbup6b1twjchnj foreign key (book_id) references book (id)
+alter table library_books add constraint FKcwjjd1vlba8vwjrjkvyaaomqw foreign key (library_id) references library (id)
